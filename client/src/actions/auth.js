@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import { types } from "../types";
-import { fecthSinToken } from "../helpers/fecth";
+import { fecthConToken, fecthSinToken } from "../helpers/fecth";
 
 export const startLogin = (email, password) => {
   return async (dispatch) => {
@@ -64,6 +64,28 @@ export const startRegister = (name, email, password) => {
   };
 };
 
+export const startChecking = () => {
+  return async (dispatch) => {
+    const resp = await fecthConToken("auth/renew");
+
+    const body = await resp.json();
+
+    if (body.ok) {
+      localStorage.setItem("token", body.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(
+        login({
+          uid: body.uid,
+          name: body.name,
+        })
+      );
+    } else {
+      dispatch(checkingFinish());
+    }
+  };
+};
+
 export const startLogout = () => {
   localStorage.clear();
 
@@ -84,4 +106,8 @@ const eventLogout = () => ({
 const login = (user) => ({
   type: types.authLogin,
   payload: user,
+});
+
+const checkingFinish = () => ({
+  type: types.authCheckingFinish,
 });

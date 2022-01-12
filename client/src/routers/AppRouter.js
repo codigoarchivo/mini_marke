@@ -1,20 +1,20 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { FormScreen } from "../components/auth/FormScreen";
-import { MarketScreen } from "../market/MarketScreen";
+import { MarketScreen } from "../components/market/MarketScreen";
 
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
+import { startChecking } from "../actions/auth";
 
 const AppRouter = () => {
-  
-  const { checking } = useSelector(({ auth }) => auth);
+  const dispatch = useDispatch();
 
-  if (!checking) {
-    return <h1>Espere...</h1>;
-  }
+  React.useEffect(() => {
+    dispatch(startChecking());
+  }, [dispatch]);
 
   return (
     <>

@@ -76,8 +76,19 @@ const loginUser = async (req, res = response) => {
     });
   }
 };
+const revalidateToken = (req, res = response) => {
+  // Create new token
+  const token = generarJWT(req.uid, req.name);
 
+  res.json({
+    ok: true,
+    uid: req.uid,
+    name: req.name,
+    token,
+  });
+};
 module.exports = {
   createUser,
   loginUser,
+  revalidateToken,
 };
