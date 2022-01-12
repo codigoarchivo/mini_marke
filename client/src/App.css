@@ -1,0 +1,27 @@
+:root {
+  --primary: #606c38;
+  --secondary: #283618;
+  --white: #fff;
+  --Brown: #333;
+  --shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  max-width: 114rem;
+  margin: 0 auto;
+}

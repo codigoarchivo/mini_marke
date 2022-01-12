@@ -1,0 +1,81 @@
+.row {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+.button {
+  width: 27%;
+  display: flex;
+  justify-content: center;
+}
+.button button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+.cont-div {
+  width: 27%;
+  margin-top: 2rem;
+  height: 74vh;
+}
+.login-form-1 {
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  padding: 8%;
+}
+.login-form-1 h3 {
+  text-align: center;
+  color: var(--Brown);
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+.login-form-2 {
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  padding: 8%;
+  background: var(--primary);
+}
+.login-form-2 h3 {
+  text-align: center;
+  color: var(--white);
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+.login-form-1 .form-group,
+.login-form-2 .form-group {
+  margin-bottom: 0.6rem;
+}
+.login-form-1 .form-control,
+.login-form-2 .form-control {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.login-form-2 .btnSubmit {
+  background-color: var(--white);
+  color: var(--primary);
+}
+.login-form-2 .ForgetPwd {
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+}
+.btnSubmit {
+  width: 100%;
+  padding: 4% 0;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+.login-form-1 .btnSubmit {
+  color: var(--white);
+  background-color: var(--primary);
+}
+.login-form-1 .ForgetPwd {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
