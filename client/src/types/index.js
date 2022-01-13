@@ -5,4 +5,13 @@ export const types = {
   authStartRegister: "[auth] Start Register",
   authStartTokenRenew: "[auth] Start token renew",
   authLogout: "[auth] Logout",
+
+  categoriaList: "[category] List",
+  categoriaAdd: "[category] Add",
+  SelectActive: "[category] Select",
+  SelectUpdate: "[category] Update",
+  SelectDelete: "[category] Delete",
+
+  uiOpenModal: "[ui] Open modal",
+  uiCloseModal: "[ui] Close modal",
 };

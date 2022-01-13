@@ -21,6 +21,10 @@ ul {
 a {
   text-decoration: none;
 }
+tbody tr {
+  padding: .2rem 0;
+}
+
 .container {
   max-width: 114rem;
   margin: 0 auto;
@@ -31,4 +35,41 @@ a {
 }
 .routes {
   width: 85%;
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.mx-1 {
+  margin: 0 1rem;
+}
+.w-11 {
+  width: 11%;
 }

@@ -1,11 +1,13 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { CategoriaMarket } from "../components/market/CategoriaMarket";
-import { ProductoMarket } from "../components/market/ProductoMarket";
-import Aside from "../components/ui/Aside";
-import { Navbar } from "../components/ui/Navbar";
+import Aside from "../components/layouts/Aside";
 
-import "../components/ui/AsideNavbar.css";
+import { Navbar } from "../components/layouts/Navbar";
+
+import { CategoriaScreen } from "../components/market/categoria/CategoriaScreen";
+import { ProductoScreen } from "../components/market/producto/ProductoScreen";
+
+import "../components/layouts/AsideNavbar.css";
 
 export const DashBoard = () => {
   return (
@@ -18,8 +20,8 @@ export const DashBoard = () => {
 
         <div className="routes">
           <Routes>
-            <Route path="/categoria" element={<CategoriaMarket />} />
-            <Route path="/producto" element={<ProductoMarket />} />
+            <Route path="/categoria" element={<CategoriaScreen />} />
+            <Route path="/producto" element={<ProductoScreen />} />
             <Route path="*" element={<Navigate to="/producto" />} />
           </Routes>
         </div>

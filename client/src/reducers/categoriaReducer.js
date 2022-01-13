@@ -1,0 +1,40 @@
+import { types } from "../types";
+
+const initialState = {
+  list: [],
+  activeSelect: null,
+};
+export const categoriaReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.categoriaList:
+      return {
+        ...state,
+        list: action.payload,
+      };
+    case types.categoriaAdd:
+      return {
+        ...state,
+        list: [...state.list, action.payload],
+      };
+    case types.SelectActive:
+      return {
+        ...state,
+        activeSelect: action.payload,
+      };
+    case types.SelectUpdate:
+      return {
+        ...state,
+        list: state.list.map((e) =>
+          e._id === action.payload._id ? (e = action.payload) : e
+        ),
+      };
+    case types.SelectDelete:
+      return {
+        ...state,
+        list: state.list.filter((e) => e._id !== state.activeSelect._id),
+      };
+
+    default:
+      return state;
+  }
+};
