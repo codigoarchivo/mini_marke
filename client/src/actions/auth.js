@@ -91,16 +91,11 @@ export const startLogout = () => {
 
   return (dispatch) => {
     dispatch(logout());
-    dispatch(eventLogout());
   };
 };
 
 const logout = () => ({
   type: types.authLogout,
-});
-
-const eventLogout = () => ({
-  type: types.eventLogout,
 });
 
 const login = (user) => ({

@@ -25,3 +25,10 @@ a {
   max-width: 114rem;
   margin: 0 auto;
 }
+.asideRoutes {
+  display: flex;
+  height: 93vh;
+}
+.routes {
+  width: 85%;
+}

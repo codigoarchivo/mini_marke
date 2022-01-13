@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { FormScreen } from "../components/auth/FormScreen";
-import { MarketScreen } from "../components/market/MarketScreen";
+import { DashBoard } from "./DashBoard";
 
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
@@ -33,7 +33,7 @@ const AppRouter = () => {
               path="/*"
               element={
                 <PrivateRoute>
-                  <MarketScreen />
+                  <DashBoard />
                 </PrivateRoute>
               }
             />
