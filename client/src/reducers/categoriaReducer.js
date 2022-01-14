@@ -11,6 +11,11 @@ export const categoriaReducer = (state = initialState, action) => {
         ...state,
         list: action.payload,
       };
+    case types.categoriaSearch:
+      return {
+        ...state,
+        list: action.payload,
+      };
     case types.categoriaAdd:
       return {
         ...state,

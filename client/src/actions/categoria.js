@@ -88,6 +88,25 @@ const selectDelete = () => ({
   type: types.SelectDelete,
 });
 
+export const categoriaSearchLoading = (val) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fecthConToken(`/categoria/name?v=${val}`);
+      const body = await resp.json();
+      if (body.ok) {
+        dispatch(searchCategory(body.filterCategory));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const searchCategory = (category) => ({
+  type: types.categoriaSearch,
+  payload: category,
+});
+
 export const selectCategoria = (item) => ({
   type: types.SelectActive,
   payload: item,

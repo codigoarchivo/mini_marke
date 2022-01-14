@@ -6,6 +6,8 @@ import {
 } from "../../../actions/categoria";
 
 import { CategoriaModal } from "./CategoriaModal";
+import { CategoriaSearch } from "./CategoriaSearch";
+
 import { uiOpenModal } from "../../../actions/ui";
 
 import "./categoria.css";
@@ -56,14 +58,7 @@ export const CategoriaList = () => {
               </button>
             </div>
             <div className="form-inline">
-              Search by name:
-              <div className="form-group">
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Type name to search"
-                />
-              </div>
+              <CategoriaSearch />
             </div>
           </div>
           <table className="table table-striped">

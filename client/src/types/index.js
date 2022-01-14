@@ -6,6 +6,7 @@ export const types = {
   authStartTokenRenew: "[auth] Start token renew",
   authLogout: "[auth] Logout",
 
+  categoriaSearch: "[category] Search",
   categoriaList: "[category] List",
   categoriaAdd: "[category] Add",
   SelectActive: "[category] Select",
