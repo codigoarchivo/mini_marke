@@ -10,15 +10,22 @@ import { ProductoScreen } from "../components/market/producto/ProductoScreen";
 import "../components/layouts/AsideNavbar.css";
 
 export const DashBoard = () => {
+  const [change, setChange] = React.useState(false);
   return (
     <>
-      <Navbar />
+      <Navbar change={change} setChange={setChange} />
       <div className="asideRoutes">
-        <div className="aside">
-          <Aside />
+        <div
+          className="aside"
+          style={change ? { width: "15%" } : { width: "5%" }}
+        >
+          <Aside change={change} />
         </div>
 
-        <div className="routes">
+        <div
+          className="routes"
+          style={change ? { width: "85%" } : { width: "95%" }}
+        >
           <Routes>
             <Route path="/categoria" element={<CategoriaScreen />} />
             <Route path="/producto" element={<ProductoScreen />} />

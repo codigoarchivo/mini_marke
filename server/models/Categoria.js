@@ -1,12 +1,16 @@
 const { Schema, model } = require("mongoose");
 
-const CategoriaSchema = new Schema(
+const CategoriaSchema = Schema(
   {
     nombre: {
       type: String,
       maxlength: 50,
       unique: true,
       require: true,
+    },
+    descripcion: {
+      type: String,
+      maxlength: 255,
     },
   },
   {

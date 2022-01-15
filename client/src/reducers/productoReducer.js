@@ -3,10 +3,11 @@ import { types } from "../types";
 const initialState = {
   list: [],
   activeSelect: null,
+  activelist: [],
 };
-export const categoriaReducer = (state = initialState, action) => {
+export const productoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.categoriaList:
+    case types.productoList:
       return {
         ...state,
         list: action.payload,
@@ -16,12 +17,17 @@ export const categoriaReducer = (state = initialState, action) => {
         ...state,
         activeSelect: null,
       };
-    case types.categoriaSearch:
+    case types.productoSearch:
       return {
         ...state,
         list: action.payload,
       };
-    case types.categoriaAdd:
+    case types.proByCat:
+      return {
+        ...state,
+        activelist: action.payload,
+      };
+    case types.productoAdd:
       return {
         ...state,
         list: [...state.list, action.payload],

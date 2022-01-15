@@ -4,9 +4,11 @@ import { CategoriaList } from "./CategoriaList";
 export const CategoriaScreen = () => {
   return (
     <>
-      <h1>Categoria</h1>
-      <hr />
-      <CategoriaList />
+      <div className="cont-scree">
+        <h1>Categoria</h1>
+        <hr />
+        <CategoriaList />
+      </div>
     </>
   );
 };

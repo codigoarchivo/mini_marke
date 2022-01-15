@@ -22,12 +22,24 @@ a {
   text-decoration: none;
 }
 tbody tr {
-  padding: .2rem 0;
+  padding: 0.2rem 0;
 }
-
+.ico-img {
+  height: auto;
+  width: 30px;
+}
 .container {
   max-width: 114rem;
   margin: 0 auto;
+}
+.cont-scree {
+  padding: 1rem;
+}
+.cont-scree h1 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-left: 1rem;
 }
 .asideRoutes {
   display: flex;
@@ -67,9 +79,39 @@ tbody tr {
 .text-left {
   text-align: left;
 }
+.text-h2 {
+  text-transform: uppercase;
+}
 .mx-1 {
   margin: 0 1rem;
 }
-.w-11 {
-  width: 11%;
+.w-14 {
+  width: 14%;
+}
+.w-100 {
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-20 {
+  width: 20%;
+}
+.m-b {
+  margin-bottom: 2rem;
+}
+.tex-bot {
+  display: flex;
+  justify-content: space-around;
+  width: 50vw;
+}
+.for-dis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.for-inp {
+  width: 50%;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
 }

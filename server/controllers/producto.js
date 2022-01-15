@@ -7,7 +7,9 @@ const Producto = require("../models/Producto");
 
 const getProducto = async (req, res = response) => {
   try {
-    const product = await Producto.find().populate("categoria");
+    const product = await Producto.find()
+      .populate("categoria")
+      .sort({ nombre: 1 });
     res.status(200).json({
       ok: true,
       product,
@@ -20,8 +22,10 @@ const getProducto = async (req, res = response) => {
   }
 };
 
+
 const createProducto = async (req, res = response) => {
   try {
+    // console.log(req);
     const product = await Producto.create(req.body);
     res.status(201).json({
       ok: true,
@@ -38,11 +42,14 @@ const createProducto = async (req, res = response) => {
 const filterProducto = async (req, res = response) => {
   try {
     const filterProduct = await Producto.find({
-      $or: [{ nombre: new RegExp(req.query.v, "i") }],
+      $or: [
+        { nombre: new RegExp(req.query.v, "i") },
+        // TODO buscar como hacer filtro categoria
+        // { categoria: new RegExp(req.query.v, "i") },
+      ],
     })
       .populate("categoria")
-      .sort({ createAt: -1 });
-
+      .sort({ nombre: 1 });
     res.status(200).json({
       ok: true,
       filterProduct,
@@ -58,9 +65,7 @@ const filterProducto = async (req, res = response) => {
 const updateProducto = async (req, res = response) => {
   try {
     // id params
-    const product = await Producto.findById(req.params.id).populate(
-      "categoria"
-    );
+    const product = await Producto.findById(req.params.id);
     if (!product) {
       return res.status(404).json({
         ok: false,

@@ -1,17 +1,25 @@
 export const types = {
-  authCheckingFinish: "[auth] Finish Checking login state",
-  authStartLogin: "[auth] Start login",
   authLogin: "[auth] Login",
+  authLogout: "[auth] Logout",
+  authStartLogin: "[auth] Start login",
   authStartRegister: "[auth] Start Register",
   authStartTokenRenew: "[auth] Start token renew",
-  authLogout: "[auth] Logout",
+  authCheckingFinish: "[auth] Finish Checking login state",
 
   categoriaSearch: "[category] Search",
   categoriaList: "[category] List",
   categoriaAdd: "[category] Add",
-  SelectActive: "[category] Select",
-  SelectUpdate: "[category] Update",
-  SelectDelete: "[category] Delete",
+
+  productoSearch: "[product] Search",
+  productoList: "[product] List",
+  productoAdd: "[product] Add",
+
+  proByCat: "[list] product-category",
+
+  SelectActive: "[cat-pro] Select",
+  SelectUpdate: "[cat-pro] Update",
+  SelectDelete: "[cat-pro] Delete",
+  SelectClear: "[cat-pro] Clear",
 
   uiOpenModal: "[ui] Open modal",
   uiCloseModal: "[ui] Close modal",

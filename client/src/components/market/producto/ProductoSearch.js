@@ -1,11 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { productoSearchLoading } from "../../../actions/producto";
 
 import icons3 from "../../../ico/icons3.png";
 
-import { categoriaSearchLoading } from "../../../actions/categoria";
-
-export const CategoriaSearch = () => {
+export const ProductoSearch = () => {
   const [formvalues, setformvalues] = React.useState({ serchText: "" });
   const { serchText } = formvalues;
 
@@ -17,7 +16,7 @@ export const CategoriaSearch = () => {
 
   const handleSerch = (e) => {
     e.preventDefault();
-    dispatch(categoriaSearchLoading(serchText));
+    dispatch(productoSearchLoading(serchText));
   };
 
   return (

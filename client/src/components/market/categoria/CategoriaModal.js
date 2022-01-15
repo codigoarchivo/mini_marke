@@ -1,13 +1,18 @@
 import React from "react";
 import Modal from "react-modal";
+
 import { useDispatch, useSelector } from "react-redux";
+
 import { uiCloseModal } from "../../../actions/ui";
 
 import {
   addNewCategoria,
+  clearCategoria,
   deletecategoria,
   updatecategoria,
 } from "../../../actions/categoria";
+
+import { initialState } from "../../../helpers/initialState";
 
 const customStyles = {
   content: {
@@ -20,29 +25,26 @@ const customStyles = {
   },
 };
 
-const initialSelect = { _id: "", nombre: "", val: "" };
+const initialSelect = Object.assign({ val: "" }, initialState);
 
 export const CategoriaModal = () => {
   const { modalOpen } = useSelector(({ ui }) => ui);
   const { activeSelect } = useSelector(({ category }) => category);
-  const [formvalues, setformvalues] = React.useState(initialSelect);
 
-  const { nombre, val } = formvalues;
+  const [formvalues, setformvalues] = React.useState(initialSelect);
+  const { nombre, val, descripcion } = formvalues;
 
   const dispatch = useDispatch();
 
   const closeModal = () => {
     dispatch(uiCloseModal());
-    setformvalues(initialSelect);
+    setformvalues(initialState);
+    dispatch(clearCategoria());
   };
 
   React.useEffect(() => {
     if (activeSelect) {
-      setformvalues({
-        _id: activeSelect._id,
-        nombre: activeSelect.nombre,
-        val: activeSelect.val,
-      });
+      setformvalues(activeSelect);
     }
   }, [activeSelect]);
 
@@ -57,7 +59,7 @@ export const CategoriaModal = () => {
       return;
     }
 
-    val === "new" && dispatch(addNewCategoria({ nombre }));
+    val === "new" && dispatch(addNewCategoria({ nombre, descripcion }));
     val === "update" && dispatch(updatecategoria(formvalues));
     val === "delete" && dispatch(deletecategoria(formvalues));
 
@@ -73,49 +75,78 @@ export const CategoriaModal = () => {
         closeTimeoutMS={200}
         style={customStyles}
       >
-        <h2>{`${val} Category`}</h2>
-        <button className="btn" onClick={closeModal}>
-          close
-        </button>
-        <div>I am a modal</div>
+        <div className="tex-bot m-b">
+          <h2 className="text-h2">{`${val} Category`}</h2>
+
+          <button className="btn btn-primary" onClick={closeModal}>
+            Close
+          </button>
+        </div>
         {val === "new" && (
-          <form onSubmit={handleSubmitform}>
+          <form className="for-dis" onSubmit={handleSubmitform}>
             <input
+              className="for-inp"
               type="text"
               onChange={handleInputChange}
               value={nombre}
               placeholder="Agrega Categoria"
               name="nombre"
             />
-            <button type="submit" className="btn">
+            <input
+              className="for-inp"
+              type="text"
+              onChange={handleInputChange}
+              value={descripcion}
+              placeholder="Detallar una descripción"
+              name="descripcion"
+            />
+            <button type="submit" className="btn btn-primary w-50">
               new
             </button>
           </form>
         )}
         {val === "update" && (
-          <form onSubmit={handleSubmitform}>
+          <form className="for-dis" onSubmit={handleSubmitform}>
             <input
+              className="for-inp"
               type="text"
               onChange={handleInputChange}
               value={nombre}
               placeholder="Modifica el nombre"
               name="nombre"
             />
-            <button type="submit" className="btn">
+            <input
+              className="for-inp"
+              type="text"
+              onChange={handleInputChange}
+              value={descripcion}
+              placeholder="Detallar una descripción"
+              name="descripcion"
+            />
+            <button type="submit" className="btn btn-primary w-50">
               Update
             </button>
           </form>
         )}
         {val === "delete" && (
-          <form onSubmit={handleSubmitform}>
+          <form className="for-dis" onSubmit={handleSubmitform}>
             <input
+              className="for-inp"
               type="text"
               onChange={handleInputChange}
               value={nombre}
               placeholder="Eliminar el nombre"
               name="nombre"
             />
-            <button type="submit" className="btn">
+            <input
+              className="for-inp"
+              type="text"
+              onChange={handleInputChange}
+              value={descripcion}
+              placeholder="Detallar una descripción"
+              name="descripcion"
+            />
+            <button type="submit" className="btn btn-primary w-50">
               Delete
             </button>
           </form>
@@ -123,14 +154,7 @@ export const CategoriaModal = () => {
         {val === "details" && (
           <div>
             <h1>{nombre}</h1>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.
-            </p>
+            <p>{descripcion}</p>
           </div>
         )}
       </Modal>

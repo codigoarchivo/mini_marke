@@ -5,7 +5,7 @@ import { types } from "../types";
 export const categoriaListLoading = () => {
   return async (dispatch) => {
     try {
-      const resp = await fecthConToken("/categoria/");
+      const resp = await fecthConToken("categoria/");
       const { category } = await resp.json();
       dispatch(listCategory(category));
     } catch (error) {
@@ -42,7 +42,7 @@ export const updatecategoria = (newItem) => {
   return async (dispatch) => {
     try {
       const resp = await fecthConToken(
-        `/categoria/${newItem._id}`,
+        `categoria/${newItem._id}`,
         newItem,
         "PUT"
       );
@@ -69,7 +69,7 @@ export const deletecategoria = (delItem) => {
   return async (dispatch) => {
     try {
       const resp = await fecthConToken(
-        `/categoria/${delItem._id}`,
+        `categoria/${delItem._id}`,
         {},
         "DELETE"
       );
@@ -91,7 +91,7 @@ const selectDelete = () => ({
 export const categoriaSearchLoading = (val) => {
   return async (dispatch) => {
     try {
-      const resp = await fecthConToken(`/categoria/name?v=${val}`);
+      const resp = await fecthConToken(`categoria/name?v=${val}`);
       const body = await resp.json();
       if (body.ok) {
         dispatch(searchCategory(body.filterCategory));
@@ -110,4 +110,8 @@ const searchCategory = (category) => ({
 export const selectCategoria = (item) => ({
   type: types.SelectActive,
   payload: item,
+});
+
+export const clearCategoria = () => ({
+  type: types.SelectClear,
 });

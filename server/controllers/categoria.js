@@ -7,10 +7,25 @@ const Categoria = require("../models/Categoria");
 
 const getCategory = async (req, res = response) => {
   try {
-    const category = await Categoria.find();
+    const category = await Categoria.find().sort({ nombre: 1 });
     res.status(200).json({
       ok: true,
       category,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      msg: "Contact the administrator",
+    });
+  }
+};
+
+const getCategoryByid = async (req, res = response) => {
+  try {
+    const product = await Categoria.findById(req.params.id);
+    res.status(200).json({
+      ok: true,
+      product,
     });
   } catch (error) {
     return res.status(500).json({
@@ -39,7 +54,7 @@ const filterCategory = async (req, res = response) => {
   try {
     const filterCategory = await Categoria.find({
       $or: [{ nombre: new RegExp(req.query.v, "i") }],
-    }).sort({ createAt: -1 });
+    }).sort({ nombre: 1 });
 
     res.status(200).json({
       ok: true,
@@ -56,7 +71,9 @@ const filterCategory = async (req, res = response) => {
 const updateCategory = async (req, res = response) => {
   try {
     // id params
-    const category = await Categoria.findById(req.params.id);
+    const category = await Categoria.findById(req.params.id).sort({
+      nombre: 1,
+    });
 
     if (!category) {
       return res.status(404).json({
@@ -118,4 +135,5 @@ module.exports = {
   filterCategory,
   updateCategory,
   deleteCategory,
+  getCategoryByid
 };
