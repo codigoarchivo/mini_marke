@@ -29,7 +29,7 @@ export const ProductoList = () => {
       setformList([]);
     }
   }, [list, setformList]);
-  
+
   React.useEffect(() => {
     dispatch(productoListLoadingByCategoria());
     dispatch(productoListLoading());
@@ -87,9 +87,9 @@ export const ProductoList = () => {
               </tr>
             </thead>
             <tbody className="text-center">
-              {formList.map((item) => (
-                <tr key={item.nombre}>
-                  <td>{item.categoria.nombre}</td>
+              {formList.map((item, i) => (
+                <tr key={i}>
+                  <td>{item.categoria?.nombre}</td>
                   <td>{item.nombre}</td>
                   <td>{item.precio}</td>
                   <td>{item.stock}</td>

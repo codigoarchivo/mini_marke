@@ -30,7 +30,7 @@ export const ProductoModal = () => {
   const { modalOpen } = useSelector(({ ui }) => ui);
   const { activeSelect } = useSelector(({ product }) => product);
   const [formvalues, setformvalues] = React.useState(initialStateP);
-  const { nombre, val, stock, precio, categoria } = formvalues;
+  const { nombre, val, stock, precio, categoria, _id, foto } = formvalues;
 
   const dispatch = useDispatch();
 
@@ -62,7 +62,7 @@ export const ProductoModal = () => {
     val === "new" &&
       dispatch(addNewProducto({ nombre, stock, precio, categoria }));
     val === "update" &&
-      dispatch(updateProducto({ nombre, stock, precio, categoria }));
+      dispatch(updateProducto({ nombre, stock, precio, categoria, _id }));
     val === "delete" && dispatch(deleteProducto());
 
     closeModal();
@@ -98,6 +98,7 @@ export const ProductoModal = () => {
               categoria={categoria}
               stock={stock}
               precio={precio}
+              foto={foto}
               val={val}
             />
           )}
@@ -112,6 +113,7 @@ export const ProductoModal = () => {
               categoria={categoria}
               stock={stock}
               precio={precio}
+              foto={foto}
               val={val}
             />
           )}
@@ -126,6 +128,7 @@ export const ProductoModal = () => {
               categoria={categoria}
               stock={stock}
               precio={precio}
+              foto={foto}
               val={val}
             />
           )}

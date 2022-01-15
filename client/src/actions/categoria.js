@@ -71,6 +71,7 @@ export const deletecategoria = () => {
       const { _id } = await getStates().category.activeSelect;
       const resp = await fecthConToken(`categoria/${_id}`, {}, "DELETE");
       const body = await resp.json();
+    
       if (body.ok) {
         dispatch(selectDelete(_id));
       } else {

@@ -60,7 +60,7 @@ export const CategoriaModal = () => {
     }
     val === "new" && dispatch(addNewCategoria({ nombre, descripcion }));
     val === "update" && dispatch(updatecategoria({ _id, nombre, descripcion }));
-    val === "delete" && dispatch(deletecategoria());
+    val === "delete" && dispatch(deletecategoria({ _id }));
 
     closeModal();
   };

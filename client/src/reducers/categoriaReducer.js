@@ -37,6 +37,7 @@ export const categoriaReducer = (state = initialState, action) => {
         list: state.list.map((e) =>
           e._id === action.payload._id ? (e = action.payload) : e
         ),
+        activeSelect: null,
       };
     case types.SelectDelete:
       return {
@@ -45,6 +46,7 @@ export const categoriaReducer = (state = initialState, action) => {
           ...state.list.splice(0, action.payload),
           ...state.list.splice(1),
         ],
+        activeSelect: null,
       };
 
     default:

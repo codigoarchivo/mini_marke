@@ -64,14 +64,30 @@ const productAddNew = (newItem) => ({
 });
 
 export const updateProducto = (newItem) => {
-  return async (dispatch, getStates) => {
-    const { _id } = await getStates().category.activeSelect;
+  return async (dispatch) => {
     try {
-      const resp = await fecthConToken(`producto/${_id}`, newItem, "PUT");
-      const body = await resp.json();
+      // const { _id } = await getStates().category.activeSelect;
+      const resp = await fecthConToken(
+        `producto/${newItem._id}`,
+        newItem,
+        "PUT"
+      );
+      const init = await resp.json();
+
+      const respN = await fecthConToken(
+        `listid/${
+          newItem.categoria._id ? newItem.categoria._id : newItem.categoria
+        }`
+      );
+      const body = await respN.json();
 
       if (body.ok) {
-        dispatch(selectUdated(newItem));
+        const next = {
+          ...init.productUpdate,
+          categoria: body.product,
+        };
+  
+        dispatch(selectUdated(next));
       } else {
         // TODO agregar validaciones
         // Swal.fire("Error", body.msg, "error");
