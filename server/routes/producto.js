@@ -15,7 +15,7 @@ router.get("/", getProducto);
 
 router.post("/", createProducto);
 
-router.get("/name/", filterProducto);
+router.get("/name", filterProducto);
 
 router.put("/:id", updateProducto);
 

@@ -10,10 +10,5 @@ export const initialStateP = {
   stock: "",
   precio: "",
   foto: "",
-  val: "",
-  categoria: {
-    descripcion: "",
-    nombre: "",
-    _id: "",
-  },
+  categoria: "",
 };

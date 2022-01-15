@@ -37,28 +37,21 @@ const listProductByCategory = (category) => ({
 });
 
 export const addNewProducto = (newItem) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
       const resp = await fecthConToken("producto", newItem, "POST");
-      const body = await resp.json();
+      const init = await resp.json();
 
-      if (!body.ok) {
-        return;
+      const respN = await fecthConToken(`listid/${newItem.categoria}`);
+      const body = await respN.json();
+
+      if (body.ok) {
+        const next = {
+          ...init.product,
+          categoria: body.product,
+        };
+        return dispatch(productAddNew(next));
       }
-
-      const nResp = await fecthConToken(`categoria/${body.product.categoria}`);
-      const newC = await nResp.json();
-
-      const newProduct = {
-        ...body.product,
-        categoria: {
-          descripcion: newC.product.descripcion,
-          nombre: newC.product.nombre,
-          _id: newC.product._id,
-        },
-      };
-
-      dispatch(productAddNew(newProduct));
     } catch (error) {
       console.log(error);
     }
@@ -71,13 +64,10 @@ const productAddNew = (newItem) => ({
 });
 
 export const updateProducto = (newItem) => {
-  return async (dispatch) => {
+  return async (dispatch, getStates) => {
+    const { _id } = await getStates().category.activeSelect;
     try {
-      const resp = await fecthConToken(
-        `producto/${newItem._id}`,
-        newItem,
-        "PUT"
-      );
+      const resp = await fecthConToken(`producto/${_id}`, newItem, "PUT");
       const body = await resp.json();
 
       if (body.ok) {
@@ -97,17 +87,14 @@ const selectUdated = (newItem) => ({
   payload: newItem,
 });
 
-export const deleteProducto = (delItem) => {
-  return async (dispatch) => {
+export const deleteProducto = () => {
+  return async (dispatch, getStates) => {
+    const { _id } = await getStates().category.activeSelect;
     try {
-      const resp = await fecthConToken(
-        `producto/${delItem._id}`,
-        {},
-        "DELETE"
-      );
+      const resp = await fecthConToken(`producto/${_id}`, {}, "DELETE");
       const body = await resp.json();
       if (body.ok) {
-        dispatch(selectDelete());
+        dispatch(selectDelete(_id));
       } else {
         Swal.fire("Error", body.msg, "error");
       }
@@ -117,8 +104,9 @@ export const deleteProducto = (delItem) => {
   };
 };
 
-const selectDelete = () => ({
+const selectDelete = (_id) => ({
   type: types.SelectDelete,
+  payload: _id,
 });
 
 export const productoSearchLoading = (val) => {

@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const ProductoSchema = Schema(
+const ProductoSchema = new Schema(
   {
     categoria: {
       type: Schema.Types.ObjectId,
@@ -10,7 +10,6 @@ const ProductoSchema = Schema(
     nombre: {
       type: String,
       maxlength: 50,
-      unique: true,
       require: true,
     },
     stock: {

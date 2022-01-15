@@ -65,17 +65,14 @@ const selectUdated = (newItem) => ({
   payload: newItem,
 });
 
-export const deletecategoria = (delItem) => {
-  return async (dispatch) => {
+export const deletecategoria = () => {
+  return async (dispatch, getStates) => {
     try {
-      const resp = await fecthConToken(
-        `categoria/${delItem._id}`,
-        {},
-        "DELETE"
-      );
+      const { _id } = await getStates().category.activeSelect;
+      const resp = await fecthConToken(`categoria/${_id}`, {}, "DELETE");
       const body = await resp.json();
       if (body.ok) {
-        dispatch(selectDelete());
+        dispatch(selectDelete(_id));
       } else {
         Swal.fire("Error", body.msg, "error");
       }
@@ -84,14 +81,15 @@ export const deletecategoria = (delItem) => {
     }
   };
 };
-const selectDelete = () => ({
+const selectDelete = (_id) => ({
   type: types.SelectDelete,
+  payload: _id,
 });
 
-export const categoriaSearchLoading = (val) => {
+export const categoriaSearchLoading = (serchText) => {
   return async (dispatch) => {
     try {
-      const resp = await fecthConToken(`categoria/name?v=${val}`);
+      const resp = await fecthConToken(`categoria/name?v=${serchText}`);
       const body = await resp.json();
       if (body.ok) {
         dispatch(searchCategory(body.filterCategory));

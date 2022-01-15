@@ -20,21 +20,6 @@ const getCategory = async (req, res = response) => {
   }
 };
 
-const getCategoryByid = async (req, res = response) => {
-  try {
-    const product = await Categoria.findById(req.params.id);
-    res.status(200).json({
-      ok: true,
-      product,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      ok: false,
-      msg: "Contact the administrator",
-    });
-  }
-};
-
 const createCategory = async (req, res = response) => {
   try {
     const category = await Categoria.create(req.body);
@@ -135,5 +120,4 @@ module.exports = {
   filterCategory,
   updateCategory,
   deleteCategory,
-  getCategoryByid
 };

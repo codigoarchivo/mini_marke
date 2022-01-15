@@ -20,12 +20,19 @@ import "../../../App.css";
 export const ProductoList = () => {
   const dispatch = useDispatch();
   const { list } = useSelector(({ product }) => product);
-  // const [formList, setformList] = React.useState([]);
+  const [formList, setformList] = React.useState([]);
 
   React.useEffect(() => {
-    dispatch(productoListLoading());
+    if (list) {
+      setformList(list);
+    } else {
+      setformList([]);
+    }
+  }, [list, setformList]);
+  
+  React.useEffect(() => {
     dispatch(productoListLoadingByCategoria());
-    // if (list) setformList(list);
+    dispatch(productoListLoading());
   }, [dispatch]);
 
   const handleAddNew = (items) => {
@@ -80,7 +87,7 @@ export const ProductoList = () => {
               </tr>
             </thead>
             <tbody className="text-center">
-              {list.map((item) => (
+              {formList.map((item) => (
                 <tr key={item.nombre}>
                   <td>{item.categoria.nombre}</td>
                   <td>{item.nombre}</td>

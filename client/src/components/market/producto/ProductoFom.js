@@ -17,8 +17,12 @@ export const ProductoFom = ({
   const [formList, setformList] = React.useState([]);
 
   React.useEffect(() => {
-    if (activelist) setformList(activelist);
-  }, [activelist]);
+    if (activelist) {
+      setformList(activelist);
+    } else {
+      setformList([]);
+    }
+  }, [activelist, setformList]);
 
   return (
     <>

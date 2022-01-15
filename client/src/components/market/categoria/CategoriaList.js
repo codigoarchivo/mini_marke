@@ -20,6 +20,16 @@ export const CategoriaList = () => {
   const dispatch = useDispatch();
   const { list } = useSelector(({ category }) => category);
 
+  const [formvalues, setformvalues] = React.useState([]);
+
+  React.useEffect(() => {
+    if (list) {
+      setformvalues(list);
+    } else {
+      setformvalues([]);
+    }
+  }, [list, setformvalues]);
+
   React.useEffect(() => {
     dispatch(categoriaListLoading());
   }, [dispatch]);
@@ -74,7 +84,7 @@ export const CategoriaList = () => {
               </tr>
             </thead>
             <tbody className="text-center">
-              {list.map((item) => (
+              {formvalues.map((item) => (
                 <tr key={item.nombre}>
                   <td>{item.nombre}</td>
                   <td>{item.descripcion}</td>

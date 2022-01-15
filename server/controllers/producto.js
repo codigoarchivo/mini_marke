@@ -3,6 +3,7 @@
   host + /api/producto
 */
 const { response } = require("express");
+const Categoria = require("../models/Categoria");
 const Producto = require("../models/Producto");
 
 const getProducto = async (req, res = response) => {
@@ -21,7 +22,6 @@ const getProducto = async (req, res = response) => {
     });
   }
 };
-
 
 const createProducto = async (req, res = response) => {
   try {
@@ -119,6 +119,20 @@ const deleteProducto = async (req, res = response) => {
     });
   }
 };
+const getCategoryByid = async (req, res = response) => {
+  try {
+    const product = await Categoria.findById(req.params.id);
+    res.status(200).json({
+      ok: true,
+      product,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      msg: "Contact the administrator",
+    });
+  }
+};
 
 module.exports = {
   getProducto,
@@ -126,4 +140,5 @@ module.exports = {
   filterProducto,
   updateProducto,
   deleteProducto,
+  getCategoryByid,
 };

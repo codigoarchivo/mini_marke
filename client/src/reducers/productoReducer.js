@@ -47,7 +47,10 @@ export const productoReducer = (state = initialState, action) => {
     case types.SelectDelete:
       return {
         ...state,
-        list: state.list.filter((e) => e._id !== state.activeSelect._id),
+        list: [
+          ...state.list.splice(0, action.payload),
+          ...state.list.splice(1),
+        ],
       };
 
     default:

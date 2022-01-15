@@ -32,7 +32,7 @@ export const CategoriaModal = () => {
   const { activeSelect } = useSelector(({ category }) => category);
 
   const [formvalues, setformvalues] = React.useState(initialSelect);
-  const { nombre, val, descripcion } = formvalues;
+  const { nombre, val, descripcion, _id } = formvalues;
 
   const dispatch = useDispatch();
 
@@ -58,10 +58,9 @@ export const CategoriaModal = () => {
     if (nombre.trim().length < 2) {
       return;
     }
-
     val === "new" && dispatch(addNewCategoria({ nombre, descripcion }));
-    val === "update" && dispatch(updatecategoria(formvalues));
-    val === "delete" && dispatch(deletecategoria(formvalues));
+    val === "update" && dispatch(updatecategoria({ _id, nombre, descripcion }));
+    val === "delete" && dispatch(deletecategoria());
 
     closeModal();
   };

@@ -26,14 +26,12 @@ const customStyles = {
   },
 };
 
-// const initialSelect = Object.assign({ val: "" }, initialStateP);
-
 export const ProductoModal = () => {
   const { modalOpen } = useSelector(({ ui }) => ui);
   const { activeSelect } = useSelector(({ product }) => product);
   const [formvalues, setformvalues] = React.useState(initialStateP);
+  const { nombre, val, stock, precio, categoria } = formvalues;
 
-  const { nombre, val, stock, precio, categoria, foto } = formvalues;
   const dispatch = useDispatch();
 
   const closeModal = () => {
@@ -43,8 +41,12 @@ export const ProductoModal = () => {
   };
 
   React.useEffect(() => {
-    if (activeSelect) setformvalues(activeSelect);
-  }, [activeSelect]);
+    if (activeSelect) {
+      setformvalues(activeSelect);
+    } else {
+      setformvalues(initialStateP);
+    }
+  }, [activeSelect, setformvalues]);
 
   const handleInputChange = ({ target }) => {
     setformvalues({ ...formvalues, [target.name]: target.value });
@@ -58,9 +60,10 @@ export const ProductoModal = () => {
     }
 
     val === "new" &&
-      dispatch(addNewProducto({ nombre, stock, precio, categoria, foto }));
-    val === "update" && dispatch(updateProducto(formvalues));
-    val === "delete" && dispatch(deleteProducto(formvalues));
+      dispatch(addNewProducto({ nombre, stock, precio, categoria }));
+    val === "update" &&
+      dispatch(updateProducto({ nombre, stock, precio, categoria }));
+    val === "delete" && dispatch(deleteProducto());
 
     closeModal();
   };
