@@ -27,13 +27,7 @@ export const ProductoFom = ({
 
   return (
     <>
-      <form
-        className="for-dis"
-        onSubmit={handleSubmitform}
-        action="/uploadmultiple"
-        encType={"multipart/form-data"}
-        method="POST"
-      >
+      <form className="for-dis" onSubmit={handleSubmitform}>
         <input
           className="for-inp"
           type="text"
@@ -42,16 +36,6 @@ export const ProductoFom = ({
           placeholder="Producto"
           name="nombre"
         />
-        <div className="form-row">
-          <label className="text-white">Select Image :</label>
-          <input
-            type="file"
-            className="form-control"
-            value={foto}
-            name="foto"
-            onChange={handleInputChange}
-          />
-        </div>
         <select
           className="for-inp"
           value={categoria}

@@ -151,7 +151,12 @@ export const CategoriaModal = () => {
           </form>
         )}
         {val === "details" && (
-          <div>
+          <div className="con-det">
+            <img
+              className="img-fluid"
+              src={`./assets/categoria/${nombre}.jpg`}
+              alt={"foto"}
+            />
             <h1>{nombre}</h1>
             <p>{descripcion}</p>
           </div>

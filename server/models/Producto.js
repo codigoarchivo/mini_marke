@@ -21,8 +21,8 @@ const ProductoSchema = new Schema(
       require: true,
     },
     foto: {
-      data: Buffer,
-      contentType: String,
+      type: String,
+      require: true,
     },
   },
   {

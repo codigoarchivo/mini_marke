@@ -84,6 +84,7 @@ export const ProductoList = () => {
                 <th>Precio</th>
                 <th>Stock</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody className="text-center">
@@ -93,22 +94,23 @@ export const ProductoList = () => {
                   <td>{item.nombre}</td>
                   <td>{item.precio}</td>
                   <td>{item.stock}</td>
+                  <td>{item.foto}</td>
                   <td>
                     <button
                       onClick={() => handleDetails(item)}
-                      className="btn btn-primary mx-1 w-18"
+                      className="btn btn-primary mx-1"
                     >
                       Details
                     </button>
                     <button
-                      className="btn btn-primary mx-1 w-18"
+                      className="btn btn-primary mx-1"
                       onClick={() => handleUpdate(item)}
                     >
                       Update
                     </button>
                     <button
                       onClick={() => handleDelete(item)}
-                      className="btn btn-primary mx-1 w-18"
+                      className="btn btn-primary mx-1"
                     >
                       Delete
                     </button>

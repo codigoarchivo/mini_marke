@@ -91,19 +91,19 @@ export const CategoriaList = () => {
                   <td>
                     <button
                       onClick={() => handleDetails(item)}
-                      className="btn btn-primary mx-1 w-14"
+                      className="btn btn-primary mx-1"
                     >
                       Details
                     </button>
                     <button
-                      className="btn btn-primary mx-1 w-14"
+                      className="btn btn-primary mx-1"
                       onClick={() => handleUpdate(item)}
                     >
                       Update
                     </button>
                     <button
                       onClick={() => handleDelete(item)}
-                      className="btn btn-primary mx-1 w-14"
+                      className="btn btn-primary mx-1"
                     >
                       Delete
                     </button>

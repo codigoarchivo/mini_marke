@@ -13,6 +13,7 @@ import {
 } from "../../../actions/producto";
 
 import { initialStateP } from "../../../helpers/initialState";
+
 import { ProductoFom } from "./ProductoFom";
 
 const customStyles = {
@@ -60,7 +61,7 @@ export const ProductoModal = () => {
     }
 
     val === "new" &&
-      dispatch(addNewProducto({ nombre, stock, precio, categoria }));
+      dispatch(addNewProducto({ nombre, stock, precio, categoria, foto }));
     val === "update" &&
       dispatch(updateProducto({ nombre, stock, precio, categoria, _id }));
     val === "delete" && dispatch(deleteProducto());
@@ -79,7 +80,7 @@ export const ProductoModal = () => {
         style={customStyles}
       >
         <div className="tex-bot m-b">
-          <h2 className="text-h2">{`${val} Category`}</h2>
+          <h2 className="text-h2">{`${val} Product`}</h2>
 
           <button className="btn btn-primary " onClick={closeModal}>
             Close
@@ -133,12 +134,17 @@ export const ProductoModal = () => {
             />
           )}
           {val === "details" && (
-            <div>
-              <ul>
-                <li>{nombre}</li>
+            <div className="con-det">
+              <img
+                className="img-fluid"
+                src={`./assets/categoria/${categoria.nombre}.jpg`}
+                alt={"foto"}
+              />
+              <h1>{nombre}</h1>{" "}
+              <ul className="con-ul">
+                <li>{categoria.nombre}</li>
                 <li>{stock}</li>
-                <li>{precio}</li>
-                {/* <li>{categoria}</li> */}
+                <li>${precio}</li>
               </ul>
             </div>
           )}

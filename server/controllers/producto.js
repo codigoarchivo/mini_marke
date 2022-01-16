@@ -25,7 +25,6 @@ const getProducto = async (req, res = response) => {
 
 const createProducto = async (req, res = response) => {
   try {
-    // console.log(req);
     const product = await Producto.create(req.body);
     res.status(201).json({
       ok: true,
@@ -109,6 +108,7 @@ const deleteProducto = async (req, res = response) => {
     });
   }
 };
+
 const getCategoryByid = async (req, res = response) => {
   try {
     const product = await Categoria.findById(req.params.id);
