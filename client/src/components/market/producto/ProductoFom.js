@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { startUploading } from "../../../actions/producto";
 
@@ -32,7 +33,10 @@ export const ProductoFom = ({
 
   const handleFileChange = ({ target }) => {
     const file = target.files[0];
-    if (file) {
+    const imgsize = target.files[0].size;
+    if (imgsize > 500000) {
+      Swal.fire("Error", "La imagen debe pesar menos de 500kb", "error");
+    } else {
       dispatch(startUploading(file));
     }
   };

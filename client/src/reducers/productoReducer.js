@@ -22,6 +22,7 @@ export const productoReducer = (state = initialState, action) => {
       return {
         ...state,
         activeSelect: null,
+        activeimg: null,
       };
     case types.productoSearch:
       return {
