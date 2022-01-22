@@ -79,22 +79,22 @@ export const ProductoList = () => {
           <table className="table table-striped">
             <thead>
               <tr>
+                <th></th>
                 <th>Categorias</th>
                 <th>Producto</th>
                 <th>Precio</th>
                 <th>Stock</th>
-                <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody className="text-center">
               {formList.map((item, i) => (
                 <tr key={i}>
+                  <td>{<img src={item.foto} width={50} alt="Foto" />}</td>
                   <td>{item.categoria?.nombre}</td>
                   <td>{item.nombre}</td>
                   <td>{item.precio}</td>
                   <td>{item.stock}</td>
-                  <td>{item.foto}</td>
                   <td>
                     <button
                       onClick={() => handleDetails(item)}

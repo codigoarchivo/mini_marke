@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import { fecthConToken } from "../helpers/fecth";
+import { fileUpload } from "../helpers/fileUpload";
 import { types } from "../types";
 
 export const productoListLoading = () => {
@@ -37,13 +38,16 @@ const listProductByCategory = (category) => ({
 });
 
 export const addNewProducto = (newItem) => {
-  return async (dispatch) => {
+  return async (dispatch, getStates) => {
+    const { activeimg } = await getStates().product;
     try {
-      const resp = await fecthConToken("producto", newItem, "POST");
-      const init = await resp.json();
+      newItem.foto = activeimg;
 
       const respN = await fecthConToken(`listid/${newItem.categoria}`);
       const body = await respN.json();
+
+      const resp = await fecthConToken("producto", newItem, "POST");
+      const init = await resp.json();
 
       if (body.ok) {
         const next = {
@@ -51,6 +55,8 @@ export const addNewProducto = (newItem) => {
           categoria: body.product,
         };
         return dispatch(productAddNew(next));
+      } else {
+        return Swal.fire("Error", "Falta llenar campos", "error");
       }
     } catch (error) {
       console.log(error);
@@ -64,9 +70,13 @@ const productAddNew = (newItem) => ({
 });
 
 export const updateProducto = (newItem) => {
-  return async (dispatch) => {
+  return async (dispatch, getStates) => {
+    const { activeimg } = await getStates().product;
     try {
-      // const { _id } = await getStates().category.activeSelect;
+      if (activeimg) {
+        newItem.foto = activeimg;
+      }
+
       const resp = await fecthConToken(
         `producto/${newItem._id}`,
         newItem,
@@ -86,11 +96,10 @@ export const updateProducto = (newItem) => {
           ...init.productUpdate,
           categoria: body.product,
         };
-  
+
         dispatch(selectUdated(next));
       } else {
-        // TODO agregar validaciones
-        // Swal.fire("Error", body.msg, "error");
+        return Swal.fire("Error", "Falta llenar campos", "error");
       }
     } catch (error) {
       console.log(error);
@@ -144,6 +153,26 @@ const searchProduct = (product) => ({
   payload: product,
 });
 
+export const startUploading = (file) => {
+  return async (dispatch) => {
+    Swal.fire({
+      title: "uploading...",
+      text: "Please wait...",
+      allowOutsideClick: false,
+
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+    const fileUrl = await fileUpload(file);
+    dispatch(fileImgCont(fileUrl));
+    Swal.close();
+  };
+};
+const fileImgCont = (fileUrl) => ({
+  type: types.fileimg,
+  payload: fileUrl,
+});
 export const selectProducto = (item) => ({
   type: types.SelectActive,
   payload: item,

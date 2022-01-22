@@ -1,5 +1,7 @@
 const { Router } = require("express");
 
+const { validateField } = require("../middlewares/validate-field");
+
 const {
   getCategory,
   createCategory,
@@ -7,16 +9,33 @@ const {
   updateCategory,
   deleteCategory,
 } = require("../controllers/categoria");
+const { check } = require("express-validator");
 
 const router = Router();
 
 router.get("/", getCategory);
 
-router.post("/", createCategory);
+router.post(
+  "/",
+  [
+    check("nombre", "La nombre debe ser obligatoria").not().isEmpty(),
+    check("descripcion", "La descripcion debe ser obligatoria").not().isEmpty(),
+    validateField,
+  ],
+  createCategory
+);
 
 router.get("/name", filterCategory);
 
-router.put("/:id", updateCategory);
+router.put(
+  "/:id",
+  [
+    check("nombre", "La nombre debe ser obligatoria").not().isEmpty(),
+    check("descripcion", "La descripcion debe ser obligatoria").not().isEmpty(),
+    validateField,
+  ],
+  updateCategory
+);
 
 router.delete("/:id", deleteCategory);
 

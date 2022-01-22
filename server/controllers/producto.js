@@ -41,11 +41,7 @@ const createProducto = async (req, res = response) => {
 const filterProducto = async (req, res = response) => {
   try {
     const filterProduct = await Producto.find({
-      $or: [
-        { nombre: new RegExp(req.query.v, "i") },
-        // TODO buscar como hacer filtro categoria
-        // { categoria: new RegExp(req.query.v, "i") },
-      ],
+      $or: [{ nombre: new RegExp(req.query.v, "i") }],
     })
       .populate("categoria")
       .sort({ nombre: 1 });

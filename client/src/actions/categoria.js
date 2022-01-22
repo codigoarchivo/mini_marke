@@ -27,6 +27,14 @@ export const addNewCategoria = (newItem) => {
 
       if (body.ok) {
         dispatch(categoryAddNew(body.category));
+      } else {
+        return Swal.fire(
+          "Error",
+          body.errors.descripcion
+            ? body.errors.descripcion.msg
+            : body.errors.nombre.msg,
+          "error"
+        );
       }
     } catch (error) {
       console.log(error);
@@ -51,8 +59,13 @@ export const updatecategoria = (newItem) => {
       if (body.ok) {
         dispatch(selectUdated(newItem));
       } else {
-        // TODO agregar validaciones
-        // Swal.fire("Error", body.msg, "error");
+        return Swal.fire(
+          "Error",
+          body.errors.descripcion
+            ? body.errors.descripcion.msg
+            : body.errors.nombre.msg,
+          "error"
+        );
       }
     } catch (error) {
       console.log(error);
@@ -69,13 +82,16 @@ export const deletecategoria = () => {
   return async (dispatch, getStates) => {
     try {
       const { _id } = await getStates().category.activeSelect;
-      const resp = await fecthConToken(`categoria/${_id}`, {}, "DELETE");
-      const body = await resp.json();
-    
-      if (body.ok) {
-        dispatch(selectDelete(_id));
+      const { list } = await getStates().product;
+
+      const dupe = list.find(({ categoria }) => categoria._id === _id);
+
+      if (dupe) {
+        return Swal.fire("Error", "No se puede eliminar la Categoria", "error");
       } else {
-        Swal.fire("Error", body.msg, "error");
+        const resp = await fecthConToken(`categoria/${_id}`, {}, "DELETE");
+        await resp.json();
+        dispatch(selectDelete(_id));
       }
     } catch (error) {
       console.log(error);

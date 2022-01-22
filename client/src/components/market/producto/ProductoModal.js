@@ -56,10 +56,6 @@ export const ProductoModal = () => {
   const handleSubmitform = (e) => {
     e.preventDefault();
 
-    if (nombre.trim().length < 2) {
-      return;
-    }
-
     val === "new" &&
       dispatch(addNewProducto({ nombre, stock, precio, categoria, foto }));
     val === "update" &&
@@ -135,11 +131,7 @@ export const ProductoModal = () => {
           )}
           {val === "details" && (
             <div className="con-det">
-              <img
-                className="img-fluid"
-                src={`./assets/categoria/${categoria.nombre}.jpg`}
-                alt={"foto"}
-              />
+              <img width={200} height={200} src={foto} alt={"foto"} />
               <h1>{nombre}</h1>{" "}
               <ul className="con-ul">
                 <li>{categoria.nombre}</li>

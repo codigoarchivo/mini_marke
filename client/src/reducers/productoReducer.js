@@ -2,8 +2,9 @@ import { types } from "../types";
 
 const initialState = {
   list: [],
-  activeSelect: null,
   activelist: [],
+  activeSelect: null,
+  activeimg: null,
 };
 export const productoReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,6 +12,11 @@ export const productoReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload,
+      };
+    case types.fileimg:
+      return {
+        ...state,
+        activeimg: action.payload,
       };
     case types.SelectClear:
       return {

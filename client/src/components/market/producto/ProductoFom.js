@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { startUploading } from "../../../actions/producto";
 
 export const ProductoFom = ({
   handleSubmitform,
@@ -10,13 +11,13 @@ export const ProductoFom = ({
   nombre,
   precio,
   stock,
-  foto,
   val,
 }) => {
   const { activelist } = useSelector(({ product }) => product);
 
-  const [formList, setformList] = React.useState([]);
+  const dispatch = useDispatch();
 
+  const [formList, setformList] = React.useState([]);
   React.useEffect(() => {
     if (activelist) {
       setformList(activelist);
@@ -25,8 +26,32 @@ export const ProductoFom = ({
     }
   }, [activelist, setformList]);
 
+  const handlePictureClick = () => {
+    document.querySelector("#fileSelector").click();
+  };
+
+  const handleFileChange = ({ target }) => {
+    const file = target.files[0];
+    if (file) {
+      dispatch(startUploading(file));
+    }
+  };
   return (
     <>
+      <div className="form-cont">
+        <input
+          id="fileSelector"
+          name="file"
+          type="file"
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
+        <div>
+          <button className="btn btn-primary" onClick={handlePictureClick}>
+            Agrega una Imagen
+          </button>
+        </div>
+      </div>
       <form className="for-dis" onSubmit={handleSubmitform}>
         <input
           className="for-inp"
