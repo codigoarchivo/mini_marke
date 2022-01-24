@@ -4,7 +4,6 @@ const ProductoSchema = new Schema(
   {
     categoria: {
       type: Schema.Types.ObjectId,
-      require: true,
       ref: "Categoria",
     },
     nombre: {
