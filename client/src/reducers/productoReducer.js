@@ -50,14 +50,15 @@ export const productoReducer = (state = initialState, action) => {
         list: state.list.map((e) =>
           e._id === action.payload._id ? (e = action.payload) : e
         ),
+        activeSelect: null,
+        activeimg: null,
       };
     case types.SelectDelete:
       return {
         ...state,
-        list: [
-          ...state.list.splice(0, action.payload),
-          ...state.list.splice(1),
-        ],
+        list: state.list.filter((e) => e._id !== action.payload),
+        activeSelect: null,
+        activeimg: null,
       };
 
     default:

@@ -42,10 +42,7 @@ export const categoriaReducer = (state = initialState, action) => {
     case types.SelectDelete:
       return {
         ...state,
-        list: [
-          ...state.list.splice(0, action.payload),
-          ...state.list.splice(1),
-        ],
+        list: state.list.filter((e) => e._id !== action.payload),
         activeSelect: null,
       };
 

@@ -22,11 +22,21 @@ const getCategory = async (req, res = response) => {
 
 const createCategory = async (req, res = response) => {
   try {
-    const category = await Categoria.create(req.body);
-    res.status(201).json({
-      ok: true,
-      category,
-    });
+    const product = await Categoria.findOne({ nombre: req.body.nombre });
+
+    if (product) {
+      return res.status(403).json({
+        ok: false,
+        msg: "La categoria ya existe",
+      });
+    } else {
+      const category = await Categoria.create(req.body);
+      res.status(201).json({
+        ok: true,
+        category,
+      });
+    }
+    
   } catch (error) {
     return res.status(500).json({
       ok: false,

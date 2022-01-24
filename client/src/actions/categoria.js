@@ -25,6 +25,10 @@ export const addNewCategoria = (newItem) => {
       const resp = await fecthConToken("categoria", newItem, "POST");
       const body = await resp.json();
 
+      if (body.msg) {
+        Swal.fire("Error", body.msg, "error");
+      }
+
       if (body.ok) {
         dispatch(categoryAddNew(body.category));
       } else {
